@@ -42,8 +42,6 @@ body {
     font-size: 2rem;
     border: 1px solid #666;
     border-radius: 0;
-    color: #000;
-    background-color: #fff;
 
     img {
       width: 2rem;
@@ -52,8 +50,8 @@ body {
 
   .unary,
   .clear {
-    color: #333;
-    background-color: #ccc;
+    /* color: #333; */
+    background-color: aquamarine;
   }
 
   .binary,
