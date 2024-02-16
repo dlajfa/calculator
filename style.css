@@ -4,17 +4,24 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  min-height: 100vh;
-  display: grid;
-  place-items: center;
+  height: 100%;
+}
+
+body {
+  /* display: grid;
+  place-items: center; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 #app {
   width: 300px;
   padding: 1rem;
-  overflow: hidden;
   border-radius: 1rem;
   border: 1px solid black;
 }
