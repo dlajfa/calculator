@@ -2,7 +2,7 @@ const LIMIT = 10;
 
 const screen = document.querySelector('#screen');
 
-let current, previous, operator;
+let current, previous, operator, error;
 
 init();
 
@@ -21,9 +21,8 @@ const numberKeys = document.querySelectorAll('.number');
 numberKeys.forEach((key) => {
   key.addEventListener('click', () => {
     if (current === '0') {
-      current = '';
-    }
-    if (current.length < LIMIT) {
+      current = key.value;
+    } else if (current.length < LIMIT) {
       current += key.value;
     }
     display();
@@ -35,10 +34,12 @@ numberKeys.forEach((key) => {
 const decimalKey = document.querySelector('.decimal');
 
 decimalKey.addEventListener('click', () => {
-  if (!current.includes('.') && current.length < LIMIT - 1) {
+  if (current === '') {
+    current = '0.';
+  } else if (!current.includes('.') && current.length < LIMIT - 1) {
     current += '.';
-    display();
   }
+  display();
 });
 
 
@@ -46,7 +47,7 @@ decimalKey.addEventListener('click', () => {
 const equalsKey = document.querySelector('.equals');
 
 equalsKey.addEventListener('click', () => {
-  if (operator) {
+  if (operator && current) {
     calculate();
   }
   operator = '';
@@ -78,30 +79,35 @@ const binaryKeys = document.querySelectorAll('.binary');
 
 binaryKeys.forEach((key) => {
   key.addEventListener('click', () => {
-    if (operator) {
+    if (operator && current) {
       calculate();
     }
     display();
 
     operator = key.value;
     previous = current;
-    current = '0';
+    current = '';
   });
 });
 
 
 // Initial State
 function init() {
-  current = '0';
+  current = '';
   operator = '';
   previous = '';
+  error = false;
   display();
 }
 
 
 // Display Function
 function display() {
-  screen.textContent = current;
+  if (error) {
+    screen.textContent = 'Error';
+  } else {
+    screen.textContent = current.slice(0, LIMIT) || '0';
+  }
 }
 
 
@@ -109,13 +115,19 @@ function display() {
 function calculate() {
   const previousNumber = Number(previous);
   const currentNumber = Number(current);
+  let result;
   if (operator === '+') {
-    current = String(previousNumber + currentNumber);
+    result = previousNumber + currentNumber;
   } else if (operator === '-') {
-    current = String(previousNumber - currentNumber);
+    result = previousNumber - currentNumber;
   } else if (operator === '*') {
-    current = String(previousNumber * currentNumber);
+    result = previousNumber * currentNumber;
   } else if (operator === '/') {
-    current = String(previousNumber / currentNumber);
+    result = previousNumber / currentNumber;
+  }
+  if (isFinite(result)) {
+    current = String(result);
+  } else {
+    error = true;
   }
 }

@@ -24,16 +24,17 @@ body {
   margin-bottom: 1rem;
   padding: 0 0.5rem;
   border-radius: 0.5rem;
-  color: #eee;
+  color: white;
   font-size: 2.5rem;
   letter-spacing: 0.125rem;
   overflow: hidden;
   text-align: right;
-  background-color: #222;
+  background-color: black;
 }
 
 #keyboard {
   display: grid;
+  border-radius: 0.5rem;
   grid-template-columns: repeat(4, 1fr);
 
   .key {
@@ -41,10 +42,24 @@ body {
     font-size: 2rem;
     border: 1px solid #666;
     border-radius: 0;
+    color: #000;
+    background-color: #fff;
 
     img {
       width: 2rem;
     }
+  }
+
+  .unary,
+  .clear {
+    color: #333;
+    background-color: #ccc;
+  }
+
+  .binary,
+  .equals {
+    fill: #ddd;
+    background-color: darkorange;
   }
 
   .key:active {
