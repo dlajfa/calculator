@@ -42,6 +42,7 @@ body {
     font-size: 2rem;
     border: 1px solid #666;
     border-radius: 0;
+    color: black;
 
     img {
       width: 2rem;
@@ -50,7 +51,6 @@ body {
 
   .unary,
   .clear {
-    /* color: #333; */
     background-color: aquamarine;
   }
 
