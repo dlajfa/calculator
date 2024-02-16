@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="icon" type="image/svg" href="./images/favicon.svg" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="screen"></div>
+
+      <div id="keyboard">
+        <button class="clear key">C</button>
+        <button class="negate operator key unary" value="-">
+          <img src="./images/negate.svg" alt="Negate" />
+        </button>
+        <button class="percent operator key unary" value="%">
+          <img src="./images/percent.svg" alt="Percent" />
+        </button>
+        <button class="divide operator key binary" value="/">
+          <img src="./images/divide.svg" alt="Divide" />
+        </button>
+
+        <input type="button" value="7" class="number key" />
+        <input type="button" value="8" class="number key" />
+        <input type="button" value="9" class="number key" />
+        <button value="*" class="multiply operator key binary">
+          <img src="./images/multiply.svg" alt="Multiply" />
+        </button>
+
+        <input type="button" value="4" class="number key" />
+        <input type="button" value="5" class="number key" />
+        <input type="button" value="6" class="number key" />
+        <button class="subtract operator key binary" value="-">
+          <img src="./images/minus.svg" alt="Subtract" />
+        </button>
+
+        <input type="button" value="1" class="number key" />
+        <input type="button" value="2" class="number key" />
+        <input type="button" value="3" class="number key" />
+        <button class="add operator key binary" value="+">
+          <img src="./images/plus.svg" alt="Add" />
+        </button>
+
+        <input type="button" value="0" class="number key" />
+        <button class="decimal key" value=".">
+          <img src="./images/dot.svg" alt="Decimal" />
+        </button>
+        <button class="equals operator key">
+          <img src="./images/equal.svg" alt="Equals" />
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
