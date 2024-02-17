@@ -1,3 +1,7 @@
+:root {
+  --font-size--: 4rem;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -10,50 +14,40 @@ body {
 }
 
 body {
-  /* display: grid;
-  place-items: center; */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 #app {
-  width: 300px;
-  padding: 1rem;
-  border-radius: 1rem;
-  border: 1px solid black;
+  width: 100%;
+  min-width: 300px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: 1fr 4fr;
 }
 
 #screen {
-  height: 5rem;
-  line-height: 5rem;
-  margin-bottom: 1rem;
-  padding: 0 0.5rem;
-  border-radius: 0.5rem;
+  padding: 0 1rem;
+  line-height: 20vh;
   color: white;
-  font-size: 2.5rem;
+  font-size: var(--font-size--);
   letter-spacing: 0.125rem;
-  overflow: hidden;
   text-align: right;
   background-color: black;
 }
 
 #keyboard {
   display: grid;
-  border-radius: 0.5rem;
   grid-template-columns: repeat(4, 1fr);
 
   .key {
-    padding: 10px;
-    font-size: 2rem;
+    padding: 5px;
+    font-size: var(--font-size--);
     border: 1px solid #666;
     border-radius: 0;
     color: black;
 
     img {
-      width: 2rem;
+      width: var(--font-size--);
     }
   }
 
@@ -73,5 +67,18 @@ body {
 
   .key[value="0"] {
     grid-column: span 2;
+  }
+}
+
+
+@media screen and (max-height: 24rem) {
+  :root {
+    --font-size--: 2rem;
+  }
+}
+
+@media screen and (max-width: 24rem) {
+  :root {
+    --font-size--: 3rem;
   }
 }

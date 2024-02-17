@@ -1,8 +1,8 @@
-const LIMIT = 10;
+const LIMIT = 11;
 
 const screen = document.querySelector('#screen');
 
-let current, previous, operator, error;
+let operand, memory, operator, error;
 
 init();
 
@@ -20,10 +20,10 @@ const numberKeys = document.querySelectorAll('.number');
 
 numberKeys.forEach((key) => {
   key.addEventListener('click', () => {
-    if (current === '0') {
-      current = key.value;
-    } else if (current.length < LIMIT) {
-      current += key.value;
+    if (operand === '0') {
+      operand = key.value;
+    } else if (operand.length < LIMIT) {
+      operand += key.value;
     }
     display();
   });
@@ -34,23 +34,11 @@ numberKeys.forEach((key) => {
 const decimalKey = document.querySelector('.decimal');
 
 decimalKey.addEventListener('click', () => {
-  if (current === '') {
-    current = '0.';
-  } else if (!current.includes('.') && current.length < LIMIT - 1) {
-    current += '.';
+  if (operand === '') {
+    operand = '0.';
+  } else if (!operand.includes('.') && operand.length < LIMIT - 1) {
+    operand += '.';
   }
-  display();
-});
-
-
-// Equals Key
-const equalsKey = document.querySelector('.equals');
-
-equalsKey.addEventListener('click', () => {
-  if (operator && current) {
-    calculate();
-  }
-  operator = '';
   display();
 });
 
@@ -61,13 +49,13 @@ const unaryKeys = document.querySelectorAll('.unary');
 unaryKeys.forEach((key) => {
   key.addEventListener('click', () => {
     if (key.value === '-') {
-      if (Number(current) < 0) {
-        current = current.slice(1);
-      } else if (Number(current) > 0) {
-        current = '-' + current;
+      if (Number(operand) < 0) {
+        operand = operand.slice(1);
+      } else if (Number(operand) > 0) {
+        operand = '-' + operand;
       }
     } else if (key.value === '%') {
-      current = String(Number(current) / 100);
+      operand = String(Number(operand) / 100);
     }
     display();
   });
@@ -79,23 +67,36 @@ const binaryKeys = document.querySelectorAll('.binary');
 
 binaryKeys.forEach((key) => {
   key.addEventListener('click', () => {
-    if (operator && current) {
+    if (memory && operator && operand) {
       calculate();
+      display();
+    } 
+    if (operand) {
+      memory = operand;
     }
-    display();
-
+    operand = '';
     operator = key.value;
-    previous = current;
-    current = '';
   });
+});
+
+
+// Equals Key
+const equalsKey = document.querySelector('.equals');
+
+equalsKey.addEventListener('click', () => {
+  if (operator && operand) {
+    calculate();
+    display();
+  }
+  operator = '';
 });
 
 
 // Initial State
 function init() {
-  current = '';
+  operand = '';
   operator = '';
-  previous = '';
+  memory = '';
   error = false;
   display();
 }
@@ -103,18 +104,19 @@ function init() {
 
 // Display Function
 function display() {
+  console.log(operand, operator, memory);
   if (error) {
     screen.textContent = 'Error';
   } else {
-    screen.textContent = current.slice(0, LIMIT) || '0';
+    screen.textContent = operand.slice(0, LIMIT) || '0';
   }
 }
 
 
 // Calculate Function
 function calculate() {
-  const previousNumber = Number(previous);
-  const currentNumber = Number(current);
+  const previousNumber = Number(memory);
+  const currentNumber = Number(operand);
   let result;
   if (operator === '+') {
     result = previousNumber + currentNumber;
@@ -126,7 +128,7 @@ function calculate() {
     result = previousNumber / currentNumber;
   }
   if (isFinite(result)) {
-    current = String(result);
+    operand = String(result);
   } else {
     error = true;
   }
