@@ -20,6 +20,8 @@ body {
 #app {
   width: 100%;
   min-width: 300px;
+  max-width: 600px;
+  margin: 0 auto;
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 4fr;
